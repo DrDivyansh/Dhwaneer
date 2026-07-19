@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The WATERS Method — How DhwaNeer Delivers a Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   THE WATERS METHOD — interactive, self-playing walkthrough
+   Self-contained. Real product images from /assets/img/products.
+   ============================================================ */
+:root{
+  --navy:#09244f; --navy-800:#0c2c60; --blue:#4897c3; --blue-2:#7bc0e6;
+  --indigo:#403594; --green:#5f9b12; --ink:#0e1c31; --muted:#9fb6d4;
+  --line:rgba(255,255,255,.12); --line-2:rgba(255,255,255,.08);
+  --grad:linear-gradient(120deg,var(--blue),var(--indigo));
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --card:rgba(255,255,255,.05);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#061735;font-family:"Barlow",system-ui,sans-serif;color:#dbe7f5;-webkit-font-smoothing:antialiased}
+
+/* Outer section (embeddable) */
+.ww{max-width:1160px;margin:0 auto;padding:clamp(28px,5vw,64px) 20px}
+.ww-head{text-align:center;max-width:760px;margin:0 auto clamp(28px,4vw,44px)}
+.ww-eyebrow{display:inline-flex;align-items:center;gap:.55rem;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.16em;font-weight:600;font-size:.9rem;color:var(--blue-2)}
+.ww-eyebrow::before{content:"";width:26px;height:2px;background:var(--blue-2);border-radius:2px}
+.ww-head h2{font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1.1;letter-spacing:-.01em;color:#fff;margin:.6rem 0 .5rem}
+.ww-head h2 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ww-head p{color:var(--muted);font-size:1.06rem;margin:0}
+
+/* Stage frame */
+.stage{
+  position:relative;background:linear-gradient(160deg,#0b2650 0%,#0a234c 42%,#141a46 100%);
+  border:1px solid var(--line);border-radius:24px;overflow:hidden;
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.7);
+}
+.stage::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 45% at 88% 6%,rgba(72,151,195,.22),transparent 60%),radial-gradient(45% 45% at 4% 96%,rgba(64,53,148,.28),transparent 60%);pointer-events:none}
+
+/* Chrome bar */
+.chrome{position:relative;display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--line-2);background:rgba(255,255,255,.03)}
+.dots{display:flex;gap:7px}.dots i{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.16)}
+.chrome .title{font-family:"Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;font-size:.82rem;color:#bcd2ea;font-weight:600}
+.chrome .live{margin-left:auto;display:inline-flex;align-items:center;gap:.45rem;font-size:.76rem;font-weight:700;letter-spacing:.05em;color:#8fe0a3;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.25);padding:.28rem .7rem;border-radius:999px}
+.chrome .live .pulse{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:beat 1.6s infinite}
+@keyframes beat{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 7px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+
+/* Project sub-header */
+.proj{position:relative;display:flex;align-items:center;gap:12px;padding:16px 26px 6px}
+.proj .pin{width:34px;height:34px;border-radius:10px;background:var(--grad);display:grid;place-items:center;flex-shrink:0}
+.proj .pin svg{width:19px;height:19px;color:#fff}
+.proj b{color:#fff;font-size:1.02rem;display:block;line-height:1.15}
+.proj span{color:var(--muted);font-size:.85rem}
+
+/* WATERS stepper */
+.stepper{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:0;padding:18px 26px 4px}
+.wnode{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;cursor:pointer;padding-top:8px;background:none;border:0;color:inherit;font-family:inherit}
+.wnode .track{position:absolute;top:29px;left:50%;width:100%;height:3px;background:rgba(255,255,255,.1);border-radius:3px;z-index:0}
+.wnode:last-child .track{display:none}
+.wnode .track i{position:absolute;inset:0;width:0;background:var(--grad);border-radius:3px;transition:width .5s var(--ease)}
+.wnode.done .track i{width:100%}
+.wnode .badge{position:relative;z-index:1;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.5rem;color:#7f97bd;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.14);transition:.4s var(--ease)}
+.wnode.active .badge{color:#fff;background:var(--grad);border-color:transparent;box-shadow:0 12px 26px -10px rgba(72,151,195,.8);transform:scale(1.08)}
+.wnode.done .badge{color:#fff;background:rgba(72,151,195,.9);border-color:transparent}
+.wnode .wlab{margin-top:9px;font-size:.72rem;line-height:1.2;color:#8ea6c6;font-weight:600;letter-spacing:.02em;transition:.3s;max-width:120px}
+.wnode.active .wlab{color:#fff}
+.wnode .check{display:none}
+.wnode.done .check{display:block;position:absolute;top:4px;right:calc(50% - 30px);width:16px;height:16px;background:var(--green);border-radius:50%;z-index:2;padding:3px}
+.wnode.done .check svg{width:100%;height:100%;color:#fff}
+
+/* Stage body: narrative + visual */
+.body{position:relative;display:grid;grid-template-columns:.86fr 1.14fr;gap:6px;padding:22px 26px 8px;min-height:340px}
+.narr{padding:14px 18px 14px 4px;align-self:center}
+.narr .bigL{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:clamp(3rem,7vw,4.6rem);line-height:.9;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.02em}
+.narr .stepno{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:.8rem;color:var(--blue-2);font-weight:600;margin:6px 0 2px}
+.narr h3{color:#fff;font-size:clamp(1.4rem,2.6vw,1.9rem);margin:0 0 .5rem;line-height:1.1;letter-spacing:-.01em}
+.narr p{color:#c3d5ec;font-size:1.02rem;margin:0;max-width:380px}
+.narr .outcome{margin-top:16px;display:inline-flex;align-items:center;gap:.5rem;font-size:.9rem;font-weight:600;color:#bfe7c9;background:rgba(95,155,18,.14);border:1px solid rgba(95,155,18,.3);padding:.5rem .9rem;border-radius:10px}
+.narr .outcome svg{width:16px;height:16px;color:#8fe0a3}
+
+/* narrative reveal */
+.narr>*{opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.narr.on>*{opacity:1;transform:none}
+.narr.on .stepno{transition-delay:.05s}
+.narr.on h3{transition-delay:.12s}
+.narr.on p{transition-delay:.2s}
+.narr.on .outcome{transition-delay:.3s}
+
+/* Visual canvas */
+.vis{position:relative;border-radius:18px;background:rgba(255,255,255,.035);border:1px solid var(--line-2);overflow:hidden;min-height:320px;display:flex;align-items:center;justify-content:center;padding:22px}
+
+/* Panes (scenes) */
+.pane{position:absolute;inset:0;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .45s var(--ease),transform .45s var(--ease),visibility 0s .45s}
+.pane.on{opacity:1;visibility:visible;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.pane .vis{position:absolute;inset:22px 26px 22px 22px}
+
+/* ---------- W: water report ---------- */
+.report{display:flex;gap:20px;width:100%;max-width:520px;align-items:stretch}
+.beaker{position:relative;width:86px;flex-shrink:0;border:2px solid rgba(255,255,255,.28);border-top:0;border-radius:0 0 16px 16px;background:rgba(255,255,255,.04);overflow:hidden}
+.beaker .water{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(180deg,#4897c3,#2f6fa8);transition:height 1.3s var(--ease) .2s}
+.pane.on .beaker .water{height:68%}
+.beaker .water::before{content:"";position:absolute;top:-6px;left:0;right:0;height:10px;background:rgba(255,255,255,.25);border-radius:50%}
+.beaker .mark{position:absolute;left:0;width:9px;height:1.5px;background:rgba(255,255,255,.3)}
+.report .rows{flex:1;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.rrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 2px;border-bottom:1px solid var(--line-2);opacity:0;transform:translateX(10px);transition:.45s var(--ease)}
+.pane.on .rrow{opacity:1;transform:none}
+.pane.on .rrow:nth-child(1){transition-delay:.15s}.pane.on .rrow:nth-child(2){transition-delay:.28s}
+.pane.on .rrow:nth-child(3){transition-delay:.41s}.pane.on .rrow:nth-child(4){transition-delay:.54s}.pane.on .rrow:nth-child(5){transition-delay:.67s}
+.rrow .k{color:#aebfd6;font-size:.92rem}
+.rrow .v{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:1.15rem;color:#fff;font-variant-numeric:tabular-nums}
+.rrow .v.warn{color:#ffcf87}
+.verdict{margin-top:12px;display:flex;align-items:center;gap:.5rem;font-size:.88rem;font-weight:600;color:#ffe0b0;background:rgba(255,180,80,.1);border:1px solid rgba(255,180,80,.25);padding:.55rem .85rem;border-radius:10px;opacity:0;transform:translateY(8px);transition:.5s var(--ease) .85s}
+.pane.on .verdict{opacity:1;transform:none}
+.verdict svg{width:16px;height:16px;flex-shrink:0;color:#ffcf87}
+
+/* ---------- A: site plan ---------- */
+.site{position:relative;width:100%;max-width:520px}
+.plan{position:relative;height:210px;border-radius:14px;background:
+  linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px) 0 0/100% 30px,
+  linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px) 0 0/30px 100%,
+  rgba(9,36,79,.4);
+  border:1px solid var(--line)}
+.zone{position:absolute;border:1.5px dashed rgba(123,192,230,.45);border-radius:8px;background:rgba(72,151,195,.06)}
+.pin{position:absolute;transform:translate(-50%,-100%) scale(0);transform-origin:bottom center;opacity:0;transition:transform .5s var(--ease),opacity .3s}
+.pane.on .pin{transform:translate(-50%,-100%) scale(1);opacity:1}
+.pin .dot{width:26px;height:26px;border-radius:50% 50% 50% 0;background:var(--grad);transform:rotate(-45deg);display:grid;place-items:center;box-shadow:0 8px 16px -6px rgba(0,0,0,.5)}
+.pin .dot svg{width:13px;height:13px;color:#fff;transform:rotate(45deg)}
+.pin .plab{position:absolute;top:-24px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.7rem;font-weight:600;color:#fff;background:rgba(9,20,40,.85);padding:.2rem .5rem;border-radius:6px}
+.pane.on .pin:nth-child(1){transition-delay:.25s}.pane.on .pin:nth-child(2){transition-delay:.5s}.pane.on .pin:nth-child(3){transition-delay:.75s}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{display:flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:600;color:#dbe7f5;background:rgba(255,255,255,.06);border:1px solid var(--line);padding:.42rem .8rem;border-radius:999px;opacity:0;transform:translateY(8px);transition:.4s var(--ease)}
+.chip svg{width:14px;height:14px;color:var(--blue-2)}
+.chip b{color:#fff}
+.pane.on .chip{opacity:1;transform:none}
+.pane.on .chip:nth-child(1){transition-delay:.9s}.pane.on .chip:nth-child(2){transition-delay:1s}.pane.on .chip:nth-child(3){transition-delay:1.1s}.pane.on .chip:nth-child(4){transition-delay:1.2s}
+
+/* ---------- T: treatment train ---------- */
+.train{display:flex;align-items:center;justify-content:center;gap:4px;width:100%;flex-wrap:nowrap}
+.tnode{position:relative;flex:1;max-width:120px;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translateY(14px) scale(.94);transition:.5s var(--ease)}
+.pane.on .tnode{opacity:1;transform:none}
+.pane.on .tnode:nth-child(1){transition-delay:.15s}.pane.on .tnode:nth-child(3){transition-delay:.5s}
+.pane.on .tnode:nth-child(5){transition-delay:.85s}.pane.on .tnode:nth-child(7){transition-delay:1.2s}
+.tnode .pic{width:100%;aspect-ratio:1/1;background:#fff;border-radius:12px;display:grid;place-items:center;padding:10px;box-shadow:0 12px 26px -14px rgba(0,0,0,.6)}
+.tnode .pic img{max-height:78px;width:auto;mix-blend-mode:multiply}
+.tnode .pic.icon{background:var(--grad)}
+.tnode .pic.icon svg{width:46px;height:46px;color:#fff}
+.tnode .tl{margin-top:9px;font-size:.76rem;font-weight:700;color:#fff;line-height:1.15}
+.tnode .ts{font-size:.68rem;color:var(--muted)}
+.pipe{flex:0 0 22px;height:3px;position:relative;align-self:flex-start;margin-top:38px;background:rgba(255,255,255,.12);border-radius:3px;overflow:hidden}
+.pipe i{position:absolute;inset:0;width:0;background:var(--blue-2);transition:width .35s var(--ease)}
+.pane.on .pipe:nth-child(2) i{width:100%;transition-delay:.4s}
+.pane.on .pipe:nth-child(4) i{width:100%;transition-delay:.75s}
+.pane.on .pipe:nth-child(6) i{width:100%;transition-delay:1.1s}
+.specpill{position:absolute;bottom:8px;left:50%;transform:translateX(-50%) translateY(8px);opacity:0;display:inline-flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:700;color:#fff;background:rgba(9,36,79,.8);border:1px solid var(--line);padding:.45rem .9rem;border-radius:999px;transition:.5s var(--ease) 1.5s}
+.pane.on .specpill{opacity:1;transform:translateX(-50%)}
+.specpill svg{width:15px;height:15px;color:var(--blue-2)}
+
+/* ---------- E: execution ---------- */
+.exec{display:flex;gap:20px;width:100%;max-width:540px;align-items:center}
+.exec .shot{flex:0 0 168px;background:#fff;border-radius:14px;padding:14px;display:grid;place-items:center;box-shadow:0 16px 34px -18px rgba(0,0,0,.7);opacity:0;transform:scale(.92);transition:.6s var(--ease) .1s}
+.pane.on .exec .shot{opacity:1;transform:none}
+.exec .shot img{max-height:190px;width:auto;mix-blend-mode:multiply}
+.exec .list{flex:1;display:flex;flex-direction:column;gap:9px}
+.eitem{display:flex;align-items:center;gap:11px;font-size:.94rem;color:#c3d5ec;opacity:0;transform:translateX(10px);transition:.4s var(--ease)}
+.eitem .box{width:22px;height:22px;border-radius:7px;border:1.5px solid rgba(255,255,255,.25);display:grid;place-items:center;flex-shrink:0;transition:.3s}
+.eitem .box svg{width:13px;height:13px;color:#fff;opacity:0;transform:scale(.4);transition:.3s}
+.eitem.tick .box{background:var(--green);border-color:transparent}
+.eitem.tick .box svg{opacity:1;transform:none}
+.eitem.tick{color:#fff}
+.pane.on .eitem{opacity:1;transform:none}
+.pane.on .eitem:nth-child(1){transition-delay:.35s}.pane.on .eitem:nth-child(2){transition-delay:.55s}
+.pane.on .eitem:nth-child(3){transition-delay:.75s}.pane.on .eitem:nth-child(4){transition-delay:.95s}.pane.on .eitem:nth-child(5){transition-delay:1.15s}
+
+/* ---------- R: commissioning gauges ---------- */
+.gauges{display:flex;gap:16px;width:100%;max-width:520px;justify-content:center;flex-wrap:wrap;position:relative}
+.gauge{flex:1;min-width:120px;max-width:150px;text-align:center}
+.dial{position:relative;width:100%;aspect-ratio:2/1.15;margin:0 auto}
+.dial svg{width:100%;height:100%;overflow:visible}
+.dial .arc-bg{fill:none;stroke:rgba(255,255,255,.12);stroke-width:9;stroke-linecap:round}
+.dial .arc-fg{fill:none;stroke:url(#gg);stroke-width:9;stroke-linecap:round;stroke-dasharray:126;stroke-dashoffset:126;transition:stroke-dashoffset 1.2s var(--ease) .2s}
+.pane.on .dial .arc-fg{stroke-dashoffset:var(--off,40)}
+.dial .needle{transform-box:fill-box;transform-origin:bottom center;transform:rotate(-88deg);transition:transform 1.2s var(--ease) .2s}
+.pane.on .dial .needle{transform:rotate(var(--rot,0deg))}
+.gauge .gv{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.5rem;color:#fff;margin-top:-6px;font-variant-numeric:tabular-nums}
+.gauge .gv small{font-size:.8rem;color:var(--muted);font-weight:600}
+.gauge .gl{font-size:.74rem;color:var(--muted)}
+.stamp{position:absolute;left:50%;bottom:-52px;transform:translateX(-50%) rotate(-6deg) scale(.4);opacity:0;display:inline-flex;align-items:center;gap:.4rem;font-family:"Barlow Condensed",sans-serif;font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-size:.95rem;color:#8fe0a3;border:2.5px solid #8fe0a3;border-radius:10px;padding:.45rem .95rem;transition:.5s cubic-bezier(.2,1.4,.4,1) 1.4s}
+.pane.on .stamp{opacity:.98;transform:translateX(-50%) rotate(-6deg) scale(1)}
+.stamp svg{width:16px;height:16px}
+
+/* ---------- S: support cycle ---------- */
+.support{width:100%;max-width:520px}
+.cycle{display:flex;align-items:center;justify-content:space-between;gap:6px;position:relative;margin-bottom:16px}
+.cycle::before{content:"";position:absolute;top:22px;left:6%;right:6%;height:3px;background:rgba(255,255,255,.1);border-radius:3px}
+.cycle .cbar{content:"";position:absolute;top:22px;left:6%;height:3px;width:0;background:var(--grad);border-radius:3px;transition:width 1.4s var(--ease) .2s}
+.pane.on .cycle .cbar{width:88%}
+.mo{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0;transform:translateY(10px);transition:.4s var(--ease)}
+.mo .mdot{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.06);border:1.5px solid var(--line);display:grid;place-items:center;color:var(--blue-2)}
+.mo .mdot svg{width:20px;height:20px}
+.mo.hot .mdot{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 10px 22px -10px rgba(72,151,195,.8)}
+.mo b{font-size:.74rem;color:#dbe7f5;font-weight:700}
+.pane.on .mo{opacity:1;transform:none}
+.pane.on .mo:nth-child(2){transition-delay:.3s}.pane.on .mo:nth-child(3){transition-delay:.5s}.pane.on .mo:nth-child(4){transition-delay:.7s}
+.pane.on .mo:nth-child(5){transition-delay:.9s}.pane.on .mo:nth-child(6){transition-delay:1.1s}
+.srow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sbadge{display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#bfe7c9;background:rgba(95,155,18,.14);border:1px solid rgba(95,155,18,.3);padding:.5rem .9rem;border-radius:10px;opacity:0;transform:translateY(8px);transition:.5s var(--ease) 1.2s}
+.pane.on .sbadge{opacity:1;transform:none}
+.sbadge svg{width:16px;height:16px;color:#8fe0a3}
+.sconsum{display:inline-flex;align-items:center;gap:.55rem;font-size:.85rem;color:#c3d5ec;background:rgba(255,255,255,.05);border:1px solid var(--line);padding:.4rem .5rem .4rem .8rem;border-radius:10px;opacity:0;transform:translateY(8px);transition:.5s var(--ease) 1.35s}
+.pane.on .sconsum{opacity:1;transform:none}
+.sconsum .th{width:30px;height:30px;background:#fff;border-radius:7px;display:grid;place-items:center;padding:3px}
+.sconsum .th img{max-height:24px;width:auto;mix-blend-mode:multiply}
+
+/* Controls */
+.controls{position:relative;display:flex;align-items:center;gap:16px;padding:16px 26px 22px}
+.progress{flex:1;height:5px;background:rgba(255,255,255,.1);border-radius:5px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--grad);border-radius:5px}
+.cbtn{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid var(--line);display:grid;place-items:center;color:#dbe7f5;cursor:pointer;transition:.2s var(--ease);flex-shrink:0}
+.cbtn:hover{background:rgba(255,255,255,.14);color:#fff}
+.cbtn svg{width:19px;height:19px}
+.cbtn .ic-pause{display:block}.cbtn .ic-play{display:none}
+.cbtn.paused .ic-pause{display:none}.cbtn.paused .ic-play{display:block}
+.caption{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;color:var(--muted);font-weight:600;min-width:118px;text-align:right}
+.caption b{color:#fff}
+
+/* CTA under stage */
+.ww-cta{text-align:center;margin-top:clamp(24px,4vw,38px)}
+.ww-cta a{display:inline-flex;align-items:center;gap:.55rem;font-weight:600;font-size:1.05rem;padding:1.05rem 2.1rem;border-radius:12px;background:var(--grad);color:#fff;text-decoration:none;box-shadow:0 14px 30px -12px rgba(72,151,195,.8);transition:transform .25s var(--ease)}
+.ww-cta a:hover{transform:translateY(-2px)}
+.ww-cta a svg{width:18px;height:18px}
+.ww-cta .sub{margin-top:12px;font-size:.9rem;color:var(--muted)}
+
+/* Responsive */
+@media(max-width:820px){
+  .body{grid-template-columns:1fr;gap:0;padding:18px 18px 6px}
+  .body>*{min-width:0}                 /* prevent train/gauges from widening the column */
+  .narr{padding:6px 4px 14px;text-align:center;min-width:0}
+  .narr p{margin-left:auto;margin-right:auto;max-width:100%}
+  .narr .outcome{max-width:100%}
+  .narr .bigL{font-size:3.4rem}
+  .vis,.pane .vis{position:relative;inset:auto;min-height:280px}
+  .pane{position:relative;visibility:visible;opacity:1;transform:none;display:none}
+  .pane.on{display:block}
+  .wnode .wlab{display:none}
+  .stepper{padding:16px 14px 4px}
+  .wnode .badge{width:38px;height:38px;font-size:1.25rem}
+  .wnode .track{top:26px}
+  .caption{display:none}
+  .exec{flex-direction:column}.exec .shot{flex:0 0 auto;width:150px}
+  .report{flex-direction:row}
+}
+@media(max-width:520px){
+  .train{gap:2px}.tnode{min-width:0}.tnode .pic img{max-height:52px}.tnode .tl{font-size:.66rem}.pipe{flex-basis:8px}
+  .tnode .ts{display:none}
+  .gauges{gap:8px}.gauge{min-width:96px}
+  .proj{padding:14px 18px 4px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition-duration:.001s!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<section class="ww">
+  <div class="ww-head">
+    <span class="ww-eyebrow">How We Deliver · The WATERS Method</span>
+    <h2>Watch how we take a project <span class="g">from water to handover</span></h2>
+    <p>Six engineered steps, one accountable team. Here's exactly how a DhwaNeer project runs — start to finish.</p>
+  </div>
+
+  <div class="stage" id="stage">
+    <!-- chrome -->
+    <div class="chrome">
+      <span class="dots"><i></i><i></i><i></i></span>
+      <span class="title">DhwaNeer · Project Walkthrough</span>
+      <span class="live"><span class="pulse"></span>Live example</span>
+    </div>
+
+    <!-- project header -->
+    <div class="proj">
+      <span class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+      <div><b>Commercial Kitchen — Foodservice Project</b><span>Mumbai · Borewell + tanker supply · high-demand kitchen line</span></div>
+    </div>
+
+    <!-- WATERS stepper -->
+    <div class="stepper" id="stepper">
+      <button class="wnode" data-i="0"><span class="track"><i></i></span><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span><span class="badge">W</span><span class="wlab">Water Analysis</span></button>
+      <button class="wnode" data-i="1"><span class="track"><i></i></span><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span><span class="badge">A</span><span class="wlab">Assessment</span></button>
+      <button class="wnode" data-i="2"><span class="track"><i></i></span><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span><span class="badge">T</span><span class="wlab">Technical Design</span></button>
+      <button class="wnode" data-i="3"><span class="track"><i></i></span><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span><span class="badge">E</span><span class="wlab">Execution</span></button>
+      <button class="wnode" data-i="4"><span class="track"><i></i></span><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span><span class="badge">R</span><span class="wlab">Readiness Check</span></button>
+      <button class="wnode" data-i="5"><span class="track"><i></i></span><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span><span class="badge">S</span><span class="wlab">Support</span></button>
+    </div>
+
+    <!-- body: narrative + visual panes -->
+    <div class="body">
+      <div class="narr" id="narr">
+        <div class="bigL" id="nL">W</div>
+        <div class="stepno" id="nNo">Step 1 of 6</div>
+        <h3 id="nH">We test your actual water</h3>
+        <p id="nP">Every project starts with your water — not a catalogue. We measure hardness, TDS and key contaminants so the system is engineered for your source.</p>
+        <div class="outcome" id="nO"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span id="nOt">Design based on facts, not guesswork</span></div>
+      </div>
+
+      <div style="position:relative">
+        <!-- W -->
+        <div class="pane on" id="p0">
+          <div class="vis">
+            <div class="report">
+              <div class="beaker"><div class="water"></div><span class="mark" style="bottom:25%"></span><span class="mark" style="bottom:50%"></span><span class="mark" style="bottom:75%"></span></div>
+              <div class="rows">
+                <div class="rrow"><span class="k">Total Dissolved Solids</span><span class="v warn" data-to="210" data-suf=" ppm">0</span></div>
+                <div class="rrow"><span class="k">Hardness</span><span class="v warn" data-to="420" data-suf=" ppm">0</span></div>
+                <div class="rrow"><span class="k">pH level</span><span class="v" data-to="7.8" data-dec="1">0</span></div>
+                <div class="rrow"><span class="k">Free Chlorine</span><span class="v" data-to="0.6" data-dec="1" data-suf=" ppm">0</span></div>
+                <div class="rrow"><span class="k">Iron</span><span class="v" data-to="0.3" data-dec="1" data-suf=" ppm">0</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="verdict"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>High hardness &amp; TDS detected → softening + RO recommended</div>
+        </div>
+
+        <!-- A -->
+        <div class="pane" id="p1">
+          <div class="vis">
+            <div class="site">
+              <div class="plan">
+                <div class="zone" style="left:8%;top:14%;width:34%;height:44%"></div>
+                <div class="zone" style="left:52%;top:20%;width:40%;height:60%"></div>
+                <div class="pin" style="left:25%;top:40%"><span class="plab">Plant room</span><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V6a5 5 0 0 1 10 0v2"/></svg></span></div>
+                <div class="pin" style="left:70%;top:56%"><span class="plab">Kitchen line</span><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2c0 3-3 4-3 7a3 3 0 0 0 6 0c0-3-3-4-3-7Z"/><path d="M4 22h16"/></svg></span></div>
+                <div class="pin" style="left:87%;top:32%"><span class="plab">Utility</span><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 22a6 6 0 0 0 6-6c0-3-6-8-6-8s-6 5-6 8a6 6 0 0 0 6 6Z"/></svg></span></div>
+              </div>
+              <div class="chips">
+                <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 3H3v18h18V3ZM3 9h18M9 21V9"/></svg>Usable space <b>4.2 m²</b></span>
+                <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 22a6 6 0 0 0 6-6c0-3-6-8-6-8s-6 5-6 8a6 6 0 0 0 6 6Z"/></svg>Peak demand <b>8,000 L/day</b></span>
+                <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Inlet <b>Borewell + Tanker</b></span>
+                <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Outlets <b>6 points</b></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T -->
+        <div class="pane" id="p2">
+          <div class="vis">
+            <div class="train">
+              <div class="tnode"><div class="pic"><img src="assets/img/products/E-20-Pre-Filter-20-inch-W-EC210.jpg" alt="Pre-filtration" loading="lazy"></div><span class="tl">Pre-Filtration</span><span class="ts">Sediment</span></div>
+              <div class="pipe"><i></i></div>
+              <div class="tnode"><div class="pic"><img src="assets/img/products/Hydrasmart-Softener.jpg" alt="Water softener" loading="lazy"></div><span class="tl">Softening</span><span class="ts">Hardness</span></div>
+              <div class="pipe"><i></i></div>
+              <div class="tnode"><div class="pic"><img src="assets/img/products/UTS-RO-100-LPH.jpg" alt="Reverse osmosis" loading="lazy"></div><span class="tl">Reverse Osmosis</span><span class="ts">TDS</span></div>
+              <div class="pipe"><i></i></div>
+              <div class="tnode"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></div><span class="tl">UV Disinfection</span><span class="ts">Microbes</span></div>
+            </div>
+          </div>
+          <div class="specpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6 7 18.2l1.9-5.8L4 8.8h6.1L12 3Z"/></svg>Engineered for 1,000 LPH · footprint-optimised</div>
+        </div>
+
+        <!-- E -->
+        <div class="pane" id="p3">
+          <div class="vis">
+            <div class="exec">
+              <div class="shot"><img src="assets/img/products/Highflow-csr.jpg" alt="Filtration system installed on site" loading="lazy"></div>
+              <div class="list">
+                <div class="eitem"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Genuine equipment delivered</div>
+                <div class="eitem"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Skid mounted &amp; levelled</div>
+                <div class="eitem"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Plumbed &amp; pressure-tested</div>
+                <div class="eitem"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Electricals &amp; controls wired</div>
+                <div class="eitem"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Flushed &amp; sanitised</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- R -->
+        <div class="pane" id="p4">
+          <div class="vis">
+            <svg width="0" height="0"><defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4897c3"/><stop offset="1" stop-color="#7bc0e6"/></linearGradient></defs></svg>
+            <div class="gauges">
+              <div class="gauge">
+                <div class="dial" style="--rot:38deg;--off:44">
+                  <svg viewBox="0 0 100 60"><path class="arc-bg" d="M10 55 A40 40 0 0 1 90 55"/><path class="arc-fg" d="M10 55 A40 40 0 0 1 90 55"/><line class="needle" x1="50" y1="55" x2="50" y2="22" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="55" r="4" fill="#fff"/></svg>
+                </div>
+                <div class="gv"><span data-to="2.8" data-dec="1">0</span> <small>bar</small></div>
+                <div class="gl">Inlet pressure</div>
+              </div>
+              <div class="gauge">
+                <div class="dial" style="--rot:55deg;--off:22">
+                  <svg viewBox="0 0 100 60"><path class="arc-bg" d="M10 55 A40 40 0 0 1 90 55"/><path class="arc-fg" d="M10 55 A40 40 0 0 1 90 55"/><line class="needle" x1="50" y1="55" x2="50" y2="22" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="55" r="4" fill="#fff"/></svg>
+                </div>
+                <div class="gv"><span data-to="1000">0</span> <small>LPH</small></div>
+                <div class="gl">Flow rate</div>
+              </div>
+              <div class="gauge">
+                <div class="dial" style="--rot:-34deg;--off:92">
+                  <svg viewBox="0 0 100 60"><path class="arc-bg" d="M10 55 A40 40 0 0 1 90 55"/><path class="arc-fg" d="M10 55 A40 40 0 0 1 90 55"/><line class="needle" x1="50" y1="55" x2="50" y2="22" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="55" r="4" fill="#fff"/></svg>
+                </div>
+                <div class="gv"><span data-to="42">0</span> <small>ppm</small></div>
+                <div class="gl">Product TDS</div>
+              </div>
+              <div class="stamp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Commissioned</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- S -->
+        <div class="pane" id="p5">
+          <div class="vis">
+            <div class="support">
+              <div class="cycle">
+                <span class="cbar"></span>
+                <div class="mo hot"><span class="mdot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></span><b>Handover</b></div>
+                <div class="mo"><span class="mdot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h18M8 3v4M16 3v4M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/></svg></span><b>Month 3</b></div>
+                <div class="mo"><span class="mdot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h18M8 3v4M16 3v4M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/></svg></span><b>Month 6</b></div>
+                <div class="mo"><span class="mdot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h18M8 3v4M16 3v4M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/></svg></span><b>Month 9</b></div>
+                <div class="mo"><span class="mdot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg></span><b>Renew</b></div>
+              </div>
+              <div class="srow">
+                <span class="sbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>AMC Active — consistent water, year after year</span>
+                <span class="sconsum"><span class="th"><img src="assets/img/products/Kleensteam-CT.jpg" alt="Consumable cartridge"></span>Consumables &amp; spares planned</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- controls -->
+    <div class="controls">
+      <button class="cbtn" id="playBtn" aria-label="Pause / play">
+        <svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+        <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5l12 7-12 7V5Z"/></svg>
+      </button>
+      <button class="cbtn" id="replayBtn" aria-label="Replay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+      </button>
+      <div class="progress"><i id="bar"></i></div>
+      <div class="caption" id="cap">Step <b>1</b> / 6</div>
+    </div>
+  </div>
+
+  <div class="ww-cta">
+    <a href="#consultation">Start your project with a water analysis
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <div class="sub">Single-point responsibility — from the first water test to lifelong AMC.</div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var STEPS=[
+    {L:'W',no:'Step 1 of 6',h:'We test your actual water',p:'Every project starts with your water — not a catalogue. We measure hardness, TDS and key contaminants so the system is engineered for your source.',o:'Design based on facts, not guesswork',ms:5600},
+    {L:'A',no:'Step 2 of 6',h:'We survey your site',p:'Space, peak demand, utilities and operating challenges are mapped on-site — so the plant fits your kitchen and your real usage.',o:'A plant that fits your space & demand',ms:6200},
+    {L:'T',no:'Step 3 of 6',h:'We engineer the system',p:'The right treatment train is designed around your site — pre-filtration, softening, RO and UV — sized for capacity, footprint and easy servicing.',o:'The correct system, correctly sized',ms:6800},
+    {L:'E',no:'Step 4 of 6',h:'We supply & install',p:'Authorised Pentair Everpure & ClairHydra platforms and approved components are installed by our own team — one point of responsibility.',o:'Built and installed by one team',ms:6400},
+    {L:'R',no:'Step 5 of 6',h:'We commission & validate',p:'Start-up, performance validation and handover against the design — so you get proven output, not just installed equipment.',o:'Proven performance before handover',ms:6200},
+    {L:'S',no:'Step 6 of 6',h:'We maintain it for life',p:'AMC, preventive maintenance, consumables planning and spares keep your water quality consistent — long after handover.',o:'Consistent water, year after year',ms:6400}
+  ];
+
+  var $=function(s,r){return (r||document).querySelector(s);};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+  var panes=$$('.pane'), nodes=$$('.wnode');
+  var nL=$('#nL'),nNo=$('#nNo'),nH=$('#nH'),nP=$('#nP'),nOt=$('#nOt');
+  var bar=$('#bar'),cap=$('#cap'),playBtn=$('#playBtn'),narr=$('#narr');
+  var cur=0, playing=true, done=false, acc=0, last=null, token=0, started=false;
+
+  function countUp(el){
+    var to=parseFloat(el.getAttribute('data-to')), dec=parseInt(el.getAttribute('data-dec')||'0',10),
+        suf=el.getAttribute('data-suf')||'', my=token, start=null, dur=1100+Math.random()*300;
+    function step(ts){
+      if(my!==token) return;                 // stale — a new step took over
+      if(start===null) start=ts;
+      var pr=Math.min((ts-start)/dur,1), e=1-Math.pow(1-pr,3);
+      el.textContent=(to*e).toFixed(dec)+suf;
+      if(pr<1) requestAnimationFrame(step); else el.textContent=to.toFixed(dec)+suf;
+    }
+    requestAnimationFrame(step);
+  }
+
+  function applyScene(i){
+    token++;                                  // invalidate any running count-ups
+    var s=STEPS[i];
+    // narrative
+    narr.classList.remove('on'); void narr.offsetWidth;
+    nL.textContent=s.L; nNo.textContent=s.no; nH.textContent=s.h; nP.textContent=s.p; nOt.textContent=s.o;
+    narr.classList.add('on');
+    // stepper
+    nodes.forEach(function(n,idx){ n.classList.toggle('active',idx===i); n.classList.toggle('done',idx<i); });
+    // panes — retrigger CSS by removing/re-adding .on
+    panes.forEach(function(p,idx){
+      if(idx===i){ p.classList.remove('on'); void p.offsetWidth; p.classList.add('on');
+        $$('[data-to]',p).forEach(function(el){ el.textContent=(parseInt(el.getAttribute('data-dec')||'0',10)?'0':'0'); countUp(el); });
+      } else { p.classList.remove('on'); }
+    });
+    cap.innerHTML='Step <b>'+(i+1)+'</b> / 6';
+  }
+
+  function enter(i){ cur=i; acc=0; done=false; applyScene(i); }
+
+  function frame(ts){
+    if(last===null) last=ts;
+    var dt=ts-last; last=ts;
+    if(playing && !done){
+      acc+=dt;
+      var p=Math.min(acc/STEPS[cur].ms,1);
+      bar.style.width=(((cur)+p)/6*100)+'%';
+      if(p>=1){
+        if(cur<5){ enter(cur+1); }
+        else { done=true; playing=false; playBtn.classList.add('paused'); bar.style.width='100%'; }
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // controls
+  playBtn.addEventListener('click',function(){
+    if(done){ enter(0); playing=true; playBtn.classList.remove('paused'); return; }
+    playing=!playing; playBtn.classList.toggle('paused',!playing);
+  });
+  $('#replayBtn').addEventListener('click',function(){ enter(0); playing=true; done=false; playBtn.classList.remove('paused'); });
+  nodes.forEach(function(n){ n.addEventListener('click',function(){ enter(parseInt(n.getAttribute('data-i'),10)); playing=true; done=false; playBtn.classList.remove('paused'); }); });
+
+  // start when scrolled into view (autoplay once visible)
+  function begin(){ if(started) return; started=true; enter(0); requestAnimationFrame(frame); }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ begin(); io.disconnect(); } }); },{threshold:.35});
+    io.observe($('#stage'));
+  } else { begin(); }
+})();
+</script>
+</body>
+</html>
