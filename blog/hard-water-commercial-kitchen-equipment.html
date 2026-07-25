@@ -924,9 +924,15 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 
 /* featured image, pulled up over the hero wave */
 .article-body{padding-top:0}
-.feat{position:relative;z-index:2;max-width:1000px;margin:calc(-1 * clamp(60px,9vw,112px)) auto clamp(34px,5vw,58px)}
+/* 660px: sized so the title AND the full photo share the first viewport on desktop.
+   At 880px the image bottom sat 142px below a 900px fold; 660 @ 3:2 = 440px tall,
+   which clears the fold for 1-2 line titles and fits every article on ~980px laptops. */
+.feat{position:relative;z-index:2;max-width:660px;margin:calc(-1 * clamp(60px,9vw,112px)) auto clamp(30px,4.4vw,48px)}
 .feat img{width:100%;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.6)}
-.feat img{aspect-ratio:4/3;object-fit:cover}
+/* 3:2 at 880px (was 4:3 at 1000px): the old well ran 750px tall — 0.83 of a laptop
+   screen — pushing the article a full viewport down. 586px keeps the photo prominent
+   while the text starts within the first scroll. */
+.feat img{aspect-ratio:3/2;object-fit:cover}
 .feat figcaption,.inline-fig figcaption{margin-top:12px;font-size:.86rem;color:var(--muted);text-align:center;font-style:italic}
 
 /* two-column layout */
@@ -1307,7 +1313,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 <section class="section article-body">
   <div class="wrap">
     <figure class="feat reveal">
-      <img src="../assets/img/projects/water-softeners.jpg" alt="Commercial water softener vessels with control valves installed in a plant room" width="960" height="1280" />
+      <img src="../assets/img/projects/water-softeners.jpg" alt="Commercial water softener vessels with control valves installed in a plant room" width="1086" height="1448" style="object-position:center 32%" />
       <figcaption>Softening is one of several possible responses to hard water. The correct process depends on the laboratory water report and on each appliance&rsquo;s own inlet-water specification.</figcaption>
     </figure>
 
@@ -1488,6 +1494,11 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
           <p>Water heaters, booster heaters, heat exchangers, hot-water lines, valves, and spray nozzles may all receive hardness deposits. USGS specifically notes that scale can clog pipes and lower electric-water-heater efficiency. It also documents reduced heat transfer and flow as recognised effects of hard-water scale. <a class="src" target="_blank" rel="noopener" href="https://www.usgs.gov/water-science-school/science/hardness-water">[Sources: USGS hardness overview]</a> and <a class="src" target="_blank" rel="noopener" href="https://www.usgs.gov/media/images/hardness-water-lime-scale-buildup-inside-water-pipe">[USGS scale explanation]</a></p>
 
           <p>The operational consequence depends on deposit location and severity. It may appear as restricted flow, uneven spray, slow heat-up, temperature-control problems, repeated heater cleaning, or visible scale at outlets. These signs are not conclusive on their own: sediment, corrosion products, low supply pressure, valve wear, and maintenance problems can look similar.</p>
+
+          <figure class="inline-fig">
+            <img src="../assets/img/projects/kitchen-uv900-a.jpg" alt="A commercial-kitchen water-treatment set with prefiltration housings and a UV unit, installed by DhwaNeer" loading="lazy" width="1448" height="1086" />
+            <figcaption>A commercial-kitchen treatment set installed by DhwaNeer. Which processes belong on each line depends on the water report and on every appliance&rsquo;s own inlet specification.</figcaption>
+          </figure>
 
           <h2 id="early-warning-signs">Early warning signs&mdash;and what they do not prove</h2>
 

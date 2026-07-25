@@ -932,9 +932,15 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 
 /* featured image, pulled up over the hero wave */
 .article-body{padding-top:0}
-.feat{position:relative;z-index:2;max-width:1000px;margin:calc(-1 * clamp(60px,9vw,112px)) auto clamp(34px,5vw,58px)}
+/* 660px: sized so the title AND the full photo share the first viewport on desktop.
+   At 880px the image bottom sat 142px below a 900px fold; 660 @ 3:2 = 440px tall,
+   which clears the fold for 1-2 line titles and fits every article on ~980px laptops. */
+.feat{position:relative;z-index:2;max-width:660px;margin:calc(-1 * clamp(60px,9vw,112px)) auto clamp(30px,4.4vw,48px)}
 .feat img{width:100%;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.6)}
-.feat img{aspect-ratio:4/3;object-fit:cover}
+/* 3:2 at 880px (was 4:3 at 1000px): the old well ran 750px tall — 0.83 of a laptop
+   screen — pushing the article a full viewport down. 586px keeps the photo prominent
+   while the text starts within the first scroll. */
+.feat img{aspect-ratio:3/2;object-fit:cover}
 .feat figcaption,.inline-fig figcaption{margin-top:12px;font-size:.86rem;color:var(--muted);text-align:center;font-style:italic}
 
 /* two-column layout */
