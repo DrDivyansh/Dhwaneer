@@ -903,11 +903,20 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .pcardf-body p{font-size:.96rem;color:var(--body);margin:0}
 
 /* install gallery — masonry via CSS columns (mixed portrait/landscape/square, no crop) */
-.gallery{columns:3;column-gap:20px}
-.gfig{break-inside:avoid;margin:0 0 20px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease)}
+/* Uniform grid, not a CSS-columns masonry. These are real site photos ranging from
+   0.45 aspect (tall cabinet) to 1.33 (landscape); left to their natural height the
+   tallest rendered 1253px — taller than the viewport. Fixed 4:3 tiles + object-fit
+   keep every thumbnail the same size, and the lightbox still opens the full,
+   uncropped photo on click. */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.gfig{margin:0;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease)}
 .gfig:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:transparent}
-.gimg{overflow:hidden;line-height:0}
-.gimg img{width:100%;height:auto;transition:transform .6s var(--ease)}
+/* square tiles: measured against 4:3 and 5:4, 1:1 preserves the most of each source
+   photo (worst case 45% vs 34%, and 75%+ for the rest) because most of these are
+   portrait. object-position sits slightly high — on equipment photos the hardware is
+   in the upper frame and floor/pipework below. */
+.gimg{overflow:hidden;line-height:0;aspect-ratio:1/1}
+.gimg img{width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block;transition:transform .6s var(--ease)}
 .gfig:hover .gimg img{transform:scale(1.05)}
 .gcap{margin:0;padding:15px 17px 17px;font-size:.88rem;color:var(--body);line-height:1.5}
 /* ===== Projects hero 2-col (desktop) + image lightbox ===== */
@@ -950,9 +959,9 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .proof-inner .approach-proof{margin-top:28px}
 
 /* projects responsive */
-@media(max-width:1024px){.gallery{columns:2}}
+@media(max-width:1024px){.gallery{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){.pgrid{grid-template-columns:1fr}}
-@media(max-width:600px){.gallery{columns:1}}
+@media(max-width:600px){.gallery{grid-template-columns:1fr}}
 
 /* ============================================================
    MOBILE OPTIMISATION — ≤768px ONLY. Desktop is untouched.
@@ -1125,8 +1134,8 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
      column at 320/360/390/430px; this just makes the column gap and
      caption rhythm fluid across the whole ≤768px band instead of a
      fixed 20px/15px. ---- */
-  .gallery{column-gap:clamp(12px,3.6vw,20px)}
-  .gfig{margin:0 0 clamp(12px,3.6vw,20px)}
+  .gallery{gap:clamp(12px,3.6vw,20px)}
+  .gfig{margin:0}
   .gcap{
     padding:clamp(11px,3.2vw,15px) clamp(13px,3.6vw,17px) clamp(13px,3.6vw,17px);
     font-size:clamp(.82rem,3.2vw,.88rem);line-height:1.45;
@@ -1249,7 +1258,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
       </div>
       </div>
       <div class="hero-figure reveal d2">
-        <img src="assets/img/projects/fine-dining-restaurant.jpg" width="900" height="1600" alt="Pentair multi-stage filtration with UV disinfection at a fine-dining restaurant kitchen, installed by DhwaNeer" />
+        <img src="assets/img/projects/pentair-manifold.jpg" width="1293" height="1217" alt="A wall-mounted Pentair twin-cartridge treatment manifold with pressure gauges, isolation valves and a stainless-steel UV chamber, installed by DhwaNeer" />
       </div>
     </div>
   </div>
@@ -1356,8 +1365,8 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
         <figcaption class="gcap">Commercial kitchen &mdash; Pentair UV 900 disinfection with spin-down and big-blue sediment &amp; carbon pre-filtration at the three-sink station.</figcaption>
       </figure>
       <figure class="gfig reveal">
-        <div class="gimg"><img src="assets/img/projects/pentair-manifold.jpg" width="744" height="700" loading="lazy" alt="Pentair twin-cartridge manifold with pressure gauges and UV for compact under-counter treatment" /></div>
-        <figcaption class="gcap">A Pentair twin-cartridge manifold with pressure gauges and UV &mdash; compact under-counter treatment.</figcaption>
+        <div class="gimg"><img src="assets/img/projects/water-softeners.jpg" width="1086" height="1448" loading="lazy" alt="A commercial water softener column with its brine tank, installed by DhwaNeer on a service terrace" /></div>
+        <figcaption class="gcap">A commercial softener column and brine tank &mdash; hardness control on a dedicated utility line.</figcaption>
       </figure>
       <figure class="gfig reveal">
         <div class="gimg"><img src="assets/img/projects/everpure-pou-a.jpg" width="575" height="1280" loading="lazy" alt="Point-of-use Everpure 4FC submicron filter with a clear sediment pre-filter on service brackets" /></div>
@@ -1366,6 +1375,10 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
       <figure class="gfig reveal">
         <div class="gimg"><img src="assets/img/projects/concealed-ro-cabinet.jpg" width="576" height="1280" loading="lazy" alt="Full RO system concealed inside a cabinet with pre-filters, membranes and pressurised storage" /></div>
         <figcaption class="gcap">A full RO system concealed inside a cabinet &mdash; pre-filters, membranes and pressurised storage tucked out of sight.</figcaption>
+      </figure>
+      <figure class="gfig reveal">
+        <div class="gimg"><img src="assets/img/projects/pentair-manifold.jpg" width="1293" height="1217" loading="lazy" alt="A Pentair twin-cartridge manifold with pressure gauges and a stainless-steel UV chamber for compact under-counter treatment" /></div>
+        <figcaption class="gcap">A twin-cartridge manifold with pressure gauges and UV &mdash; compact under-counter treatment.</figcaption>
       </figure>
     </div>
   </div>
