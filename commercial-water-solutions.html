@@ -728,9 +728,19 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
     display:grid!important;
     grid-auto-flow:column;
     grid-template-rows:repeat(2,1fr);
-    grid-auto-columns:clamp(168px,51vw,220px);
+    /* ~1.6 columns per screen: the next tile is clearly a CUT card, not a
+       near-complete one — that partial edge is what reads as "swipe me" */
+    grid-auto-columns:clamp(180px,57vw,240px);
     align-items:stretch;
+    /* snapped cards line up with the page gutter rather than the bleed edge */
+    scroll-padding-left:clamp(16px,4.6vw,24px);
+    /* soft fade on the right edge = the same affordance the client marquee uses */
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 42px),transparent);
+    mask-image:linear-gradient(90deg,#000 calc(100% - 42px),transparent);
   }
+  /* once scrolled to the very end there is nothing more to hint at, so drop the fade */
+  #solve .pillars.at-end,#solutions .dom-grid.at-end{
+    -webkit-mask-image:none;mask-image:none}
   #solve .pillars>*,#solutions .dom-grid>*{width:auto;min-width:0}
   /* denser internals for the narrower card */
   #solve .pillar,#solutions .dom{padding:clamp(16px,4.4vw,20px) clamp(15px,4.2vw,19px)}
@@ -1305,6 +1315,16 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 /* ---------- Year ---------- */
 document.getElementById('year').textContent=new Date().getFullYear();
+
+/* ---------- Carousels: drop the right-edge fade once fully scrolled ---------- */
+document.querySelectorAll('#solve .pillars, #solutions .dom-grid').forEach(function(g){
+  var sync=function(){
+    g.classList.toggle('at-end', g.scrollLeft + g.clientWidth >= g.scrollWidth - 2);
+  };
+  g.addEventListener('scroll', sync, {passive:true});
+  window.addEventListener('resize', sync);
+  sync();
+});
 </script>
 </body>
 </html>
