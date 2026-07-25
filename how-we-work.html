@@ -67,7 +67,7 @@
       "@type": "HowToStep",
       "position": 3,
       "name": "Technical Design",
-      "text": "We design the treatment train for your water \u2014 pre-filter, softening, RO and UV in the right sequence \u2014 built on authorized Pentair Everpure and ClairHydra platforms.",
+      "text": "We design the full treatment train for your water \u2014 raw water pump and storage, filtration, RO, treated water storage and the pumping system that delivers it to point of use \u2014 built on authorized Pentair Everpure and ClairHydra platforms.",
       "url": "https://www.dhwaneer.com/how-we-work.html#waters-t"
     },
     {
@@ -166,6 +166,16 @@
       "@type": "Question",
       "name": "Do you work outside Mumbai?",
       "acceptedAnswer": { "@type": "Answer", "text": "Yes. DhwaNeer is based in Mumbai and executes turnkey projects pan-India, including multi-site and multi-city water programmes. Share your city and we will plan the site visit accordingly." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you provide water quality reports we can show an FSSAI auditor?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every AMC customer receives a quarterly water quality report from a NABL-accredited laboratory, covering the parameters relevant to their site, with before and after treatment values where applicable. It supports the compliance and audit-readiness process, though meeting FSSAI requirements remains the responsibility of the food business operator. Applicable testing frequency and scope should be confirmed against the current FSSAI licence conditions for that site." }
+    },
+    {
+      "@type": "Question",
+      "name": "How often are the water quality reports issued?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Quarterly, for customers on an AMC. Beyond audit documentation, the same reports give an operational baseline showing source water drifting, for instance pre-monsoon to post-monsoon or tanker versus borewell, before it turns into an equipment problem. Exact scope and frequency should be confirmed against the current FSSAI licence conditions and supply arrangement for that site." }
     }
   ]
 }
@@ -399,20 +409,20 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .wt-ai .ic{width:28px;height:28px;border-radius:8px;background:rgba(72,151,195,.16);display:grid;place-items:center;color:#7bc0e6;flex-shrink:0}
 .wt-ai .ic svg{width:16px;height:16px}
 .wt-ai b{color:#fff}
-/* T train */
+/* T train — 7 stages: Raw Water Pump, Raw Water Tank, Filtration, RO System, Treated Tank, Pumping, End Use */
 .wt-train{display:flex;align-items:flex-start;justify-content:center;gap:4px;width:100%}
-.wt-tn{flex:1;max-width:76px;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translateY(8px) scale(.94);transition:.45s var(--ease)}
+.wt-tn{flex:1;max-width:54px;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translateY(8px) scale(.94);transition:.45s var(--ease)}
 .wt-pane.on .wt-tn{opacity:1;transform:none} /* tn & pipe are both divs — target real node positions below */
-.wt-pane.on .wt-tn:nth-of-type(1){transition-delay:.12s}.wt-pane.on .wt-tn:nth-of-type(3){transition-delay:.3s}.wt-pane.on .wt-tn:nth-of-type(5){transition-delay:.48s}.wt-pane.on .wt-tn:nth-of-type(7){transition-delay:.66s}
-.wt-tn .pic{width:100%;aspect-ratio:1;background:#fff;border-radius:10px;display:grid;place-items:center;padding:7px;box-shadow:0 8px 18px -10px rgba(0,0,0,.6)}
+.wt-pane.on .wt-tn:nth-of-type(1){transition-delay:.12s}.wt-pane.on .wt-tn:nth-of-type(3){transition-delay:.3s}.wt-pane.on .wt-tn:nth-of-type(5){transition-delay:.48s}.wt-pane.on .wt-tn:nth-of-type(7){transition-delay:.66s}.wt-pane.on .wt-tn:nth-of-type(9){transition-delay:.84s}.wt-pane.on .wt-tn:nth-of-type(11){transition-delay:1.02s}.wt-pane.on .wt-tn:nth-of-type(13){transition-delay:1.2s}
+.wt-tn .pic{width:100%;aspect-ratio:1;background:#fff;border-radius:9px;display:grid;place-items:center;padding:5px;box-shadow:0 8px 18px -10px rgba(0,0,0,.6)}
 .wt-tn .pic img{max-height:52px;width:auto;mix-blend-mode:multiply}
-.wt-tn .pic.icon{background:var(--grad-accent)}.wt-tn .pic.icon svg{width:36px;height:36px;color:#fff}
-.wt-tn b{font-size:.66rem;color:#fff;margin-top:6px;line-height:1.1;font-weight:600}
-.wt-tn small{font-size:.58rem;color:#9ab0cd}
-.wt-pipe{flex:0 0 12px;height:2px;background:rgba(255,255,255,.16);margin-top:29px;position:relative;overflow:hidden;border-radius:2px}
+.wt-tn .pic.icon{background:var(--grad-accent)}.wt-tn .pic.icon svg{width:26px;height:26px;color:#fff}
+.wt-tn b{font-size:.6rem;color:#fff;margin-top:5px;line-height:1.1;font-weight:600}
+.wt-tn small{font-size:.54rem;color:#9ab0cd}
+.wt-pipe{flex:0 0 8px;height:2px;background:rgba(255,255,255,.16);margin-top:20px;position:relative;overflow:hidden;border-radius:2px}
 .wt-pipe i{position:absolute;inset:0;width:0;background:#7bc0e6}
 .wt-pane.on .wt-pipe i{width:100%;transition:width .3s var(--ease)}
-.wt-pane.on .wt-pipe:nth-of-type(2) i{transition-delay:.24s}.wt-pane.on .wt-pipe:nth-of-type(4) i{transition-delay:.42s}.wt-pane.on .wt-pipe:nth-of-type(6) i{transition-delay:.6s}
+.wt-pane.on .wt-pipe:nth-of-type(2) i{transition-delay:.24s}.wt-pane.on .wt-pipe:nth-of-type(4) i{transition-delay:.42s}.wt-pane.on .wt-pipe:nth-of-type(6) i{transition-delay:.6s}.wt-pane.on .wt-pipe:nth-of-type(8) i{transition-delay:.78s}.wt-pane.on .wt-pipe:nth-of-type(10) i{transition-delay:.96s}.wt-pane.on .wt-pipe:nth-of-type(12) i{transition-delay:1.14s}
 .wt-platforms{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;opacity:0;transition:.5s var(--ease) .85s}
 .wt-pane.on .wt-platforms{opacity:1}
 .wt-platforms .pl{font-size:.72rem;color:#bcd2ea;font-weight:600}
@@ -864,13 +874,15 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .mli{display:flex;align-items:center;gap:9px;font-size:.82rem;color:#cddcef}
 .mli .ic{width:25px;height:25px;border-radius:7px;background:rgba(72,151,195,.18);display:grid;place-items:center;color:#7bc0e6;flex-shrink:0}
 .mli .ic svg{width:14px;height:14px}
-/* T — treatment train */
-.mtrain{display:flex;align-items:flex-start;justify-content:center;gap:5px;width:100%}
-.mtn{flex:0 1 64px;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;min-width:0}
-.mtn .pic{width:100%;aspect-ratio:1;background:#fff;border-radius:9px;display:grid;place-items:center;padding:6px;box-shadow:0 8px 16px -10px rgba(0,0,0,.6)}
+/* T — treatment train (7 stages) */
+.mtrain{display:flex;align-items:flex-start;justify-content:center;gap:3px;width:100%}
+.mtn{flex:0 1 38px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;min-width:0}
+.mtn .pic{width:100%;aspect-ratio:1;background:#fff;border-radius:8px;display:grid;place-items:center;padding:4px;box-shadow:0 8px 16px -10px rgba(0,0,0,.6)}
 .mtn .pic img{max-height:42px;width:auto;mix-blend-mode:multiply}
-.mtn small{font-size:.6rem;color:#cfe0f5;font-weight:600;line-height:1.1}
-.mpipe{flex:0 0 10px;height:2px;background:rgba(123,192,230,.55);border-radius:2px;margin-top:26px}
+.mtn .pic.icon{background:var(--grad-accent)}
+.mtn .pic.icon svg{width:60%;height:60%;color:#fff}
+.mtn small{font-size:.52rem;color:#cfe0f5;font-weight:600;line-height:1.1}
+.mpipe{flex:0 0 6px;height:2px;background:rgba(123,192,230,.55);border-radius:2px;margin-top:15px}
 .mbrands{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}
 .mbrands .chip{background:#fff;border-radius:7px;height:26px;padding:0 9px;display:grid;place-items:center}
 .mbrands .chip img{height:13px;width:auto;display:block}
@@ -921,15 +933,15 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
    come after the originals, so they win. Sizes are caps on flex items, so panes
    still shrink cleanly on narrow screens with no overflow. */
 
-/* T — Technical Design: grow the treatment-train tiles so they fill the row */
-.wtw-stage .wt-train{gap:6px}
-.wtw-stage .wt-tn{max-width:132px}
-.wtw-stage .wt-tn .pic{padding:10px;border-radius:13px}
+/* T — Technical Design: 7-stage treatment-train tiles, sized to fit one row */
+.wtw-stage .wt-train{gap:5px}
+.wtw-stage .wt-tn{max-width:94px}
+.wtw-stage .wt-tn .pic{padding:8px;border-radius:12px}
 .wtw-stage .wt-tn .pic img{max-height:100%;max-width:100%;width:auto;height:auto}
-.wtw-stage .wt-tn .pic.icon svg{width:54%;height:54%}
-.wtw-stage .wt-tn b{font-size:.8rem;margin-top:8px}
-.wtw-stage .wt-tn small{font-size:.68rem}
-.wtw-stage .wt-pipe{flex-basis:22px;margin-top:52px}
+.wtw-stage .wt-tn .pic.icon svg{width:52%;height:52%}
+.wtw-stage .wt-tn b{font-size:.74rem;margin-top:6px}
+.wtw-stage .wt-tn small{font-size:.64rem}
+.wtw-stage .wt-pipe{flex-basis:16px;margin-top:37px}
 .wtw-stage .wt-platforms .chip{height:38px;padding:0 12px}
 .wtw-stage .wt-platforms .chip img{height:22px}
 .wtw-stage .wt-platforms .pl,.wtw-stage .wt-platforms .yrs{font-size:.78rem}
@@ -958,6 +970,20 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .wtw-stage .wt-tn .pic{overflow:hidden}
 .wtw-stage .wt-tn .pic img{width:100%;height:100%;object-fit:contain;min-height:0}
 /* ===== WALKTHROUGH-V2 END ===== */
+/* ===== WALKTHROUGH-V2 MOBILE (7-stage train) START =====
+   Must come after WALKTHROUGH-V2 above: same specificity as the desktop
+   .wtw-stage .wt-pipe / .wt-tn rules there, so this block has to win on
+   source order, not just on the media condition. Pipes/gaps are fixed-width
+   (flex-shrink:0), so they need shrinking further on narrow screens to leave
+   room for the (shrinkable) node tiles. */
+@media(max-width:768px){
+  .wtw-stage .wt-train{gap:2px}
+  .wtw-stage .wt-pipe{flex-basis:5px;margin-top:18px}
+  .wtw-stage .wt-tn .pic{padding:4px}
+  .wtw-stage .wt-tn b{font-size:.6rem;margin-top:4px}
+  .wtw-stage .wt-tn small{font-size:.52rem}
+}
+/* ===== WALKTHROUGH-V2 MOBILE (7-stage train) END ===== */
 </style>
 </head>
 <body>
@@ -998,11 +1024,11 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
       <div class="nav-scrim" id="scrim"></div>
       <ul class="menu" id="menu">
         <li><a href="index.html">Home</a></li>
+        <li><a href="about-us.html">About Us</a></li>
         <li><a href="commercial-water-solutions.html">Water Solutions</a></li>
         <li><a href="how-we-work.html" class="active" aria-current="page">How We Work</a></li>
         <li><a href="our-projects.html">Our Projects</a></li>
         <li><a href="blog/index.html">Blogs</a></li>
-        <li><a href="about-us.html">About Us</a></li>
         <li class="menu-cta"><a href="https://wa.me/917837864464?text=Hi%20DhwaNeer%2C%20I%27d%20like%20to%20discuss%20a%20water%20treatment%20project.%20My%20city%20is%20" class="btn btn-primary" target="_blank" rel="noopener">Discuss Your Project</a></li>
       </ul>
       <div class="nav-cta">
@@ -1102,13 +1128,19 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
                     <!-- T -->
                     <div class="wt-pane" id="wp2">
                       <div class="wt-train">
-                        <div class="wt-tn"><div class="pic"><img src="assets/img/products/E-20-Pre-Filter-20-inch-W-EC210.jpg" alt="Pre-filtration" loading="lazy"></div><b>Pre-Filter</b><small>Sediment</small></div>
+                        <div class="wt-tn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 12V6M12 12l5.2 3M12 12l-5.2 3"/></svg></div><b>Raw Water Pump</b><small>Intake</small></div>
                         <div class="wt-pipe"><i></i></div>
-                        <div class="wt-tn"><div class="pic"><img src="assets/img/products/Hydrasmart-Softener.jpg" alt="Softener" loading="lazy"></div><b>Softening</b><small>Hardness</small></div>
+                        <div class="wt-tn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></div><b>Raw Water Tank</b><small>Storage</small></div>
                         <div class="wt-pipe"><i></i></div>
-                        <div class="wt-tn"><div class="pic"><img src="assets/img/products/UTS-RO-100-LPH.jpg" alt="Reverse osmosis" loading="lazy"></div><b>RO</b><small>TDS</small></div>
+                        <div class="wt-tn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h18l-7 8v7l-4 2v-9L3 4Z"/></svg></div><b>Filtration</b><small>Sediment &amp; hardness</small></div>
                         <div class="wt-pipe"><i></i></div>
-                        <div class="wt-tn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></div><b>UV</b><small>Microbes</small></div>
+                        <div class="wt-tn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 8 4.5-8 4.5-8-4.5L12 3Z"/><path d="m4 12 8 4.5 8-4.5"/><path d="m4 16.5 8 4.5 8-4.5"/></svg></div><b>RO System</b><small>TDS</small></div>
+                        <div class="wt-pipe"><i></i></div>
+                        <div class="wt-tn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></div><b>Treated Tank</b><small>Storage</small></div>
+                        <div class="wt-pipe"><i></i></div>
+                        <div class="wt-tn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15 16 9"/><circle cx="12" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg></div><b>Pumping</b><small>Pressure</small></div>
+                        <div class="wt-pipe"><i></i></div>
+                        <div class="wt-tn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2v3h6a6 6 0 0 1 6 6"/><path d="M17 11l2.83 2.83a4 4 0 1 1-5.66 0L17 11Z"/></svg></div><b>End Use</b><small>Kitchen &amp; outlets</small></div>
                       </div>
                       <div class="wt-platforms"><span class="pl">Built on:</span><span class="chip"><img src="assets/img/brands/pentair-everpure-mark.png" alt="Pentair Everpure"></span><span class="chip"><img src="assets/img/brands/clairhydra-mark.png" alt="ClairHydra"></span><span class="yrs">Pentair Everpure · 90+ yrs</span></div>
                     </div>
@@ -1233,27 +1265,33 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
           <div class="mvis-top"><span class="mbadge">T</span><span class="mstepno">Step 3 of 6</span></div>
         <div class="mgfx mgfx-t" aria-hidden="true">
           <div class="mtrain">
-            <div class="mtn"><div class="pic"><img src="assets/img/products/E-20-Pre-Filter-20-inch-W-EC210.jpg" alt="Pre-filter" loading="lazy"></div><small>Pre-Filter</small></div>
+            <div class="mtn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 12V6M12 12l5.2 3M12 12l-5.2 3"/></svg></div><small>Raw Water Pump</small></div>
             <div class="mpipe"></div>
-            <div class="mtn"><div class="pic"><img src="assets/img/products/Hydrasmart-Softener.jpg" alt="Softener" loading="lazy"></div><small>Softening</small></div>
+            <div class="mtn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></div><small>Raw Water Tank</small></div>
             <div class="mpipe"></div>
-            <div class="mtn"><div class="pic"><img src="assets/img/products/UTS-RO-100-LPH.jpg" alt="Reverse osmosis" loading="lazy"></div><small>RO</small></div>
+            <div class="mtn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h18l-7 8v7l-4 2v-9L3 4Z"/></svg></div><small>Filtration</small></div>
             <div class="mpipe"></div>
-            <div class="mtn"><div class="pic"><img src="assets/img/products/UV-2-steriliser.png" alt="UV steriliser" loading="lazy"></div><small>UV</small></div>
+            <div class="mtn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 8 4.5-8 4.5-8-4.5L12 3Z"/><path d="m4 12 8 4.5 8-4.5"/><path d="m4 16.5 8 4.5 8-4.5"/></svg></div><small>RO System</small></div>
+            <div class="mpipe"></div>
+            <div class="mtn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></div><small>Treated Tank</small></div>
+            <div class="mpipe"></div>
+            <div class="mtn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15 16 9"/><circle cx="12" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg></div><small>Pumping</small></div>
+            <div class="mpipe"></div>
+            <div class="mtn"><div class="pic icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2v3h6a6 6 0 0 1 6 6"/><path d="M17 11l2.83 2.83a4 4 0 1 1-5.66 0L17 11Z"/></svg></div><small>End Use</small></div>
           </div>
           <div class="mbrands"><span class="chip"><img src="assets/img/brands/pentair-everpure-mark.png" alt="Pentair Everpure"></span><span class="chip"><img src="assets/img/brands/clairhydra-mark.png" alt="ClairHydra"></span></div>
         </div>
         </div>
         <div class="mbody">
           <h3 class="mname">Technical Design</h3>
-          <p class="msum">We design the treatment train &mdash; pre-filter, softening, RO and UV &mdash; on Pentair Everpure and ClairHydra platforms.</p>
+          <p class="msum">We design the full water train &mdash; from raw water pump and storage through filtration, RO and treated storage to the pumping system &mdash; on Pentair Everpure and ClairHydra platforms.</p>
           <details class="mdetail">
             <summary>Read the detail<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary>
             <div class="mdetail-in">
-              <div class="mblk"><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg> What happens</span><p>We design the treatment train for your water &mdash; pre-filter, softening, RO and UV in the right sequence &mdash; built on authorized Pentair Everpure and ClairHydra platforms, with Pentair Everpure bringing 90+ years behind the components.</p></div>
+              <div class="mblk"><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg> What happens</span><p>We design the full treatment train for your water &mdash; raw water pump and storage, filtration for sediment and hardness (softening where your water needs it), RO for TDS, treated water storage and a pumping system that delivers it under pressure to point of use, with UV disinfection added where microbial control is needed &mdash; built on authorized Pentair Everpure and ClairHydra platforms, with Pentair Everpure bringing 90+ years behind the components.</p></div>
               <div class="mblk"><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg> What we need from you</span><p>Sign-off on the proposed design, along with any product or budget preferences you want us to work within.</p></div>
               <div class="mblk"><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M12 8C12 5 10 3 8 3S5 5 6 8h6ZM12 8c0-3 2-5 4-5s3 2 2 5h-6Z"/></svg> What you get</span><p>An engineering-first proposal that connects the problem, the selected system, the execution scope and the outcome.</p></div>
-              <div class="mchips"><b>Treatment train</b><span class="mchip">Pre-Filter</span><span class="mchip">Softening</span><span class="mchip">RO</span><span class="mchip">UV</span><span class="mchip">Pentair Everpure</span><span class="mchip">ClairHydra</span></div>
+              <div class="mchips"><b>Treatment train</b><span class="mchip">Raw Water Pump</span><span class="mchip">Raw Water Tank</span><span class="mchip">Filtration</span><span class="mchip">RO System</span><span class="mchip">Treated Tank</span><span class="mchip">Pumping</span><span class="mchip">End Use</span><span class="mchip">Pentair Everpure</span><span class="mchip">ClairHydra</span></div>
             </div>
           </details>
         </div>
@@ -1329,7 +1367,8 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
               <div class="mblk"><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg> What happens</span><p>We back the system with a planned AMC cycle &mdash; handover, then service at M3, M6 and M9, then renew &mdash; with consumables and spares planned ahead. It is system-driven, not owner-driven, so nothing stops if an engineer moves on.</p></div>
               <div class="mblk"><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg> What we need from you</span><p>An AMC agreement and reasonable service access on the scheduled visits.</p></div>
               <div class="mblk"><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M12 8C12 5 10 3 8 3S5 5 6 8h6ZM12 8c0-3 2-5 4-5s3 2 2 5h-6Z"/></svg> What you get</span><p>Consistent water quality and one accountable team on call, long after handover.</p></div>
-              <div class="mchips"><b>AMC cycle</b><span class="mchip">Handover</span><span class="mchip">M3</span><span class="mchip">M6</span><span class="mchip">M9</span><span class="mchip">Renew</span></div>
+              <div class="mblk"><span class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg> Reporting</span><p>AMC customers also get a quarterly water quality report from a NABL-accredited lab &mdash; the kind of record an FSSAI auditor asks for, and an early read on source water drifting before it becomes an equipment problem.</p></div>
+              <div class="mchips"><b>AMC cycle</b><span class="mchip">Handover</span><span class="mchip">M3</span><span class="mchip">M6</span><span class="mchip">M9</span><span class="mchip">Renew</span><span class="mchip">Quarterly report</span></div>
             </div>
           </details>
         </div>
@@ -1354,6 +1393,35 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
       <div class="tl-node"><span class="tl-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20a8 8 0 1 1 16 0"/><path d="M12 12l4-3"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg></span><span class="d">Step 5</span><b>Commissioning</b></div>
       <div class="tl-node"><span class="tl-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg></span><span class="d">Ongoing</span><b>AMC &amp; support</b></div>
     </div>
+  </div>
+</section>
+
+<!-- ===================== WATER QUALITY REPORTING / AUDIT READINESS ===================== -->
+<section class="section" id="quality-reports">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="justify-content:center">Audit-Ready Documentation</span>
+      <h2>Documentation your auditor will actually accept</h2>
+      <p>An AMC isn&rsquo;t only about keeping the system running &mdash; it&rsquo;s also a paper trail. Every AMC customer gets a quarterly water quality report they can hand an auditor without a scramble.</p>
+    </div>
+    <div class="pillars">
+      <article class="pillar reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></span>
+        <h3>A quarterly lab report, on file</h3>
+        <p>Every AMC customer receives a quarterly water quality report from a NABL-accredited laboratory, covering the parameters relevant to their site, with before/after treatment values where applicable.</p>
+      </article>
+      <article class="pillar reveal d1">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
+        <h3>Ready before the auditor asks</h3>
+        <p>FSSAI&rsquo;s food-service hygiene requirements expect potable water meeting IS 10500 wherever water is used as an ingredient or touches food-contact surfaces, and expect businesses to retain testing records. Current lab reports mean an audit request gets answered on the spot, not a scramble to arrange testing.</p>
+      </article>
+      <article class="pillar reveal d2">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></span>
+        <h3>An operational baseline too</h3>
+        <p>The same quarterly numbers double as an early warning system &mdash; you can see source water drifting, pre-monsoon to post-monsoon or tanker to borewell, before it turns into an equipment problem.</p>
+      </article>
+    </div>
+    <p class="reveal" style="max-width:740px;margin:30px auto 0;text-align:center;font-size:.92rem;color:var(--muted)">DhwaNeer&rsquo;s reporting supports your compliance and audit-readiness process &mdash; meeting FSSAI requirements remains the food business operator&rsquo;s responsibility. Applicable testing frequency and scope should be confirmed against your site&rsquo;s current FSSAI licence conditions and supply arrangement.</p>
   </div>
 </section>
 
@@ -1455,6 +1523,14 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
         <summary>Do you work outside Mumbai?</summary>
         <p>Yes. DhwaNeer is based in Mumbai and executes turnkey projects pan-India, including multi-site and multi-city water programmes. Share your city and we will plan the site visit accordingly.</p>
       </details>
+      <details>
+        <summary>Do you provide water quality reports we can show an FSSAI auditor?</summary>
+        <p>Yes. Every AMC customer receives a quarterly water quality report from a NABL-accredited laboratory, covering the parameters relevant to their site, with before/after treatment values where applicable. It supports your compliance and audit-readiness process &mdash; meeting FSSAI requirements remains the food business operator&rsquo;s responsibility, and the applicable testing frequency and scope should be confirmed against your site&rsquo;s current FSSAI licence conditions.</p>
+      </details>
+      <details>
+        <summary>How often are the water quality reports issued?</summary>
+        <p>Quarterly, for customers on an AMC. Beyond audit documentation, the same reports give you an operational baseline &mdash; a way to see source water drifting, for instance pre- to post-monsoon or tanker versus borewell, before it turns into an equipment problem. Confirm the exact scope and frequency against your site&rsquo;s current FSSAI licence conditions and supply arrangement, since requirements can vary by site.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -1488,11 +1564,11 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
       <div class="fbrand">
         <img src="assets/img/new-logo.png" alt="DhwaNeer" width="180" />
         <p>DhwaNeer Enviro Solutions LLP &mdash; commercial water treatment and turnkey water management for hospitality, foodservice, corporate, institutional and industrial environments. Authorised Pentair Everpure &amp; ClairHydra partner.</p>
-        <a class="foot-google" href="https://maps.google.com/?cid=16961627387766931497" target="_blank" rel="noopener" aria-label="Rated 5.0 out of 5 from 44 reviews on Google — opens Google reviews in a new tab">
+        <a class="foot-google" href="https://maps.google.com/?cid=16961627387766931497" target="_blank" rel="noopener" aria-label="Rated 5.0 out of 5 from 46 reviews on Google — opens Google reviews in a new tab">
           <svg class="g-logo" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/></svg>
           <span class="fg-txt">
             <span class="fg-top"><b>5.0</b><span class="fg-stars" aria-hidden="true">★★★★★</span></span>
-            <span class="fg-sub">44 Google reviews</span>
+            <span class="fg-sub">46 Google reviews</span>
           </span>
         </a>
         <div class="foot-social">
@@ -1505,11 +1581,11 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
         <h4>Quick Links</h4>
         <div class="flinks">
           <a href="index.html">Home</a>
+          <a href="about-us.html">About Us</a>
           <a href="commercial-water-solutions.html">Water Solutions</a>
           <a href="how-we-work.html">How We Work</a>
           <a href="our-projects.html">Our Projects</a>
           <a href="blog/index.html">Blogs</a>
-          <a href="about-us.html">About Us</a>
           <a href="contact-us.html">Contact Us</a>
         </div>
       </div>
@@ -1597,7 +1673,7 @@ document.getElementById('year').textContent=new Date().getFullYear();
   var STEPS=[
     {L:'W',name:'Water Analysis',d:'We lab-test your water — TDS, hardness, pH, iron & microbes — then plan the right-fit system for your report.',ms:5200},
     {L:'A',name:'Assessment',d:'We map space, current & future demand, plumbing, electrical & BMS — with your MEP & kitchen consultants — so the system is never under- or over-sized.',ms:5600},
-    {L:'T',name:'Technical Design',d:'We pick the right process for your water quality — wrong sizing wastes water, harms equipment & adds cost. Built on Pentair Everpure & ClairHydra.',ms:5600},
+    {L:'T',name:'Technical Design',d:'We design the full train — pump, storage, filtration, RO, storage & pumping — matched to your water quality. Built on Pentair Everpure & ClairHydra.',ms:5600},
     {L:'E',name:'Execution',d:'We supply & install with genuine components — Astral, Sintex, John Guest, Pentair & ClairHydra — by our own team.',ms:5200},
     {L:'R',name:'Readiness Check',d:'We commission & validate against the design — proven pressure, flow & output TDS before handover.',ms:5000},
     {L:'S',name:'Support',d:'System-driven AMC — consistent water, planned consumables & spares, with no dependency on any one person.',ms:5400}
