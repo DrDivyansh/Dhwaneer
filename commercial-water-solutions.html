@@ -719,6 +719,43 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
    ============================================================ */
 @media(max-width:768px){
 
+  /* ---- "What we solve" + "Our solutions": 2-ROW horizontal carousel ----
+     A single row of ~78vw cards only showed one-and-a-bit at a time. Switching
+     these two to a 2-row grid that scrolls sideways shows ~4 cards per screen,
+     so the breadth of the offering is obvious at a glance. (#segments keeps the
+     single row — only 5 cards, and it reads fine.) */
+  #solve .pillars,#solutions .dom-grid{
+    display:grid!important;
+    grid-auto-flow:column;
+    grid-template-rows:repeat(2,1fr);
+    grid-auto-columns:clamp(152px,46vw,200px);
+    align-items:stretch;
+  }
+  #solve .pillars>*,#solutions .dom-grid>*{width:auto;min-width:0}
+  /* denser internals for the narrower card */
+  #solve .pillar,#solutions .dom{padding:clamp(14px,3.8vw,18px) clamp(13px,3.4vw,16px)}
+  #solve .pillar .ic,#solutions .dom .ic{
+    width:clamp(34px,9vw,42px);height:clamp(34px,9vw,42px);margin-bottom:clamp(8px,2.4vw,12px)}
+  #solve .pillar .ic svg,#solutions .dom .ic svg{width:clamp(17px,4.4vw,21px);height:clamp(17px,4.4vw,21px)}
+  #solve .pillar h3,#solutions .dom h3{font-size:clamp(.9rem,3.5vw,1rem);margin-bottom:.3rem}
+  #solve .pillar p,#solutions .dom p{font-size:clamp(.78rem,3vw,.86rem);line-height:1.5}
+  #solutions .dom .refs{font-size:clamp(.72rem,2.8vw,.78rem);padding-top:clamp(7px,2.2vw,10px)}
+
+  /* ---- WATERS method: compact inline list instead of six large tiles ----
+     The tiles cost ~3 rows of height to say what a single wrapped line says.
+     Detail lives on the walkthrough, which the CTA below already links to. */
+  #method .wleg{display:flex;flex-wrap:wrap;justify-content:center;
+    gap:clamp(5px,1.8vw,9px);max-width:none;margin-top:2px}
+  #method .wleg-item{flex:0 0 auto;flex-direction:row;align-items:center;
+    gap:clamp(5px,1.6vw,7px);padding:clamp(.34rem,1.5vw,.46rem) clamp(.55rem,2.2vw,.75rem);
+    border-radius:999px}
+  #method .wleg-item .lb{width:clamp(18px,5vw,22px);height:clamp(18px,5vw,22px);
+    border-radius:6px;font-size:clamp(.78rem,3vw,.92rem)}
+  #method .wleg-item span:last-child{font-size:clamp(.72rem,2.8vw,.8rem);line-height:1.2}
+  #method .btn-lg{width:100%;justify-content:center}
+  /* mobile drops the "Pentair " prefix (matches the homepage chip) */
+  .ap-chip .hide-mob{display:none}
+
   /* ---- solution / segment cards (.dom — shared by both .dom-grid instances) ---- */
   .dom .ic{width:clamp(44px,11vw,54px);height:clamp(44px,11vw,54px);margin-bottom:clamp(12px,3.4vw,18px)}
   .dom .ic svg{width:clamp(22px,5.6vw,28px);height:clamp(22px,5.6vw,28px)}
@@ -1095,7 +1132,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
       <div class="wleg-item"><span class="lb">S</span><span>Support</span></div>
     </div>
     <div class="approach-proof reveal d2">
-      <span class="ap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 12 2 2 4-4"/><path d="M12 3 4 6v6c0 5 3.4 7.8 8 9 4.6-1.2 8-4 8-9V6l-8-3Z"/></svg>Authorized <b>Pentair Everpure</b> &amp; <b>ClairHydra</b> partner</span>
+      <span class="ap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 12 2 2 4-4"/><path d="M12 3 4 6v6c0 5 3.4 7.8 8 9 4.6-1.2 8-4 8-9V6l-8-3Z"/></svg>Authorized <b><span class="hide-mob">Pentair </span>Everpure</b> &amp; <b>ClairHydra</b> partner</span>
       <span class="ap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Designed, installed &amp; commissioned by <b>one team</b></span>
     </div>
     <div style="text-align:center;margin-top:40px" class="reveal d3">
