@@ -957,11 +957,25 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
    At 880px the image bottom sat 142px below a 900px fold; 660 @ 3:2 = 440px tall,
    which clears the fold for 1-2 line titles and fits every article on ~980px laptops. */
 .feat{position:relative;z-index:2;max-width:660px;margin:calc(-1 * clamp(60px,9vw,112px)) auto clamp(30px,4.4vw,48px)}
-.feat img{width:100%;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.6)}
+
 /* 3:2 at 880px (was 4:3 at 1000px): the old well ran 750px tall — 0.83 of a laptop
    screen — pushing the article a full viewport down. 586px keeps the photo prominent
    while the text starts within the first scroll. */
-.feat img{aspect-ratio:3/2;object-fit:cover}
+/* blur-fill frame: the photo is never cropped — it sits fully contained and the
+   same photo, blurred, fills the frame's spare edges. Sources here run 0.56 to
+   1.33 aspect, so a hard 3:2 crop was cutting 11-62% off each one. */
+.feat-frame{position:relative;aspect-ratio:3/2;overflow:hidden;border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.6);background:#0d2f66;cursor:zoom-in}
+.feat-bg{position:absolute;top:-6%;left:-6%;width:112%;height:112%;object-fit:cover;
+  filter:blur(26px) saturate(1.08) brightness(.92)}
+.feat-main{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;display:block;
+  filter:drop-shadow(0 10px 26px rgba(4,16,38,.45))}
+@media(max-width:768px){.feat--portrait .feat-frame{aspect-ratio:4/5}}
+/* lightbox — same pattern as our-projects: backdrop click closes, image click doesn't */
+.cs-feat-frame{cursor:zoom-in}
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(6,17,38,.93);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.lightbox.on{display:flex}
+.lightbox img{max-width:min(1080px,94vw);max-height:92vh;width:auto;height:auto;border-radius:12px;box-shadow:0 30px 80px -20px rgba(0,0,0,.75);cursor:default}
 .feat figcaption,.inline-fig figcaption{margin-top:12px;font-size:.86rem;color:var(--muted);text-align:center;font-style:italic}
 
 /* two-column layout */
@@ -1341,8 +1355,11 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 <!-- ===================== ARTICLE BODY ===================== -->
 <section class="section article-body">
   <div class="wrap">
-    <figure class="feat reveal">
-      <img src="../assets/img/projects/institutional-ro-plant.jpg" alt="A skid-mounted commercial RO plant in a tiled plant room, with a stainless-steel control cabinet, raw-water, pure-water and product-water flow meters, three pressure gauges and a blue FRP pretreatment vessel alongside" width="901" height="1600" style="object-position:center 30%" />
+    <figure class="feat feat--portrait reveal">
+      <div class="feat-frame">
+        <img class="feat-bg" src="../assets/img/projects/institutional-ro-plant.jpg" alt="" aria-hidden="true" />
+        <img class="feat-main" src="../assets/img/projects/institutional-ro-plant.jpg" alt="A skid-mounted commercial RO plant in a tiled plant room, with a stainless-steel control cabinet, raw-water, pure-water and product-water flow meters, three pressure gauges and a blue FRP pretreatment vessel alongside" width="901" height="1600" style="object-position:center 30%" />
+      </div>
       <figcaption>A commercial RO plant with its pretreatment vessel, flow meters and pressure gauges &mdash; the instruments used to check feed, permeate and product flow against the design basis.</figcaption>
     </figure>
 
@@ -1928,6 +1945,28 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 /* ---------- Year ---------- */
 document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+<!-- Featured-image lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Close image">&times;</button>
+  <img id="lbImg" src="" alt="" />
+</div>
+<script>
+(function(){
+  var lb=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg'),
+      lbClose=document.getElementById('lbClose'),
+      frame=document.querySelector('.feat-frame'),
+      main=document.querySelector('.feat-main');
+  if(!lb||!frame||!main) return;
+  function openLb(){ lbImg.src=main.currentSrc||main.src; lbImg.alt=main.alt;
+    lb.classList.add('on'); lb.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function closeLb(){ lb.classList.remove('on'); lb.setAttribute('aria-hidden','true');
+    document.body.style.overflow=''; }
+  frame.addEventListener('click', openLb);
+  lb.addEventListener('click', function(e){ if(e.target!==lbImg) closeLb(); });
+  lbClose.addEventListener('click', closeLb);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLb(); });
+})();
 </script>
 </body>
 </html>
