@@ -952,7 +952,16 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
      from the white curve — clearly floating, no kissed edge */
   .hero-figure img{margin-bottom:64px}
 }
-.pcardf-img,.gimg,.hero-figure{cursor:zoom-in}
+.pcardf:not(.pcardf-link) .pcardf-img,.gimg,.hero-figure{cursor:zoom-in}
+.pcardf-link{color:inherit;text-decoration:none}
+.pcardf-link .pcardf-img{cursor:pointer}
+.pcardf-more{margin-top:auto;padding-top:15px;display:inline-flex;align-items:center;gap:8px;
+  font-weight:700;color:var(--blue-600);font-size:.95rem}
+.pcardf-more svg{width:17px;height:17px;flex:none;transition:transform .25s var(--ease)}
+.pcardf-link:hover .pcardf-more svg{transform:translateX(4px)}
+.pcardf-cs{position:absolute;left:14px;bottom:14px;z-index:2;background:var(--navy);color:#fff;
+  font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.12em;
+  font-size:.72rem;font-weight:700;padding:5px 11px;border-radius:999px}
 .lightbox{position:fixed;inset:0;z-index:200;background:rgba(6,17,38,.93);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
 .lightbox.on{display:flex}
 .lightbox img{max-width:min(1080px,94vw);max-height:92vh;width:auto;height:auto;border-radius:12px;box-shadow:0 30px 80px -20px rgba(0,0,0,.75);cursor:default}
@@ -1312,51 +1321,47 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 <section class="section" id="featured">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow" style="justify-content:center">Featured Projects</span>
-      <h2>A closer look at four installs</h2>
-      <p>Kitchens, a caf&eacute; and an institutional plant we designed, plumbed and commissioned &mdash; genuine Pentair components, laid out for clean, scheduled servicing.</p>
+      <span class="eyebrow" style="justify-content:center">Case Studies</span>
+      <h2>Three projects, start to finish</h2>
+      <p>The water report, the engineering decision and the measured outcome. Each of these is a real DhwaNeer project, written up in full.</p>
     </div>
     <div class="pgrid">
-      <article class="pcardf reveal">
+      <a class="pcardf pcardf-link reveal" href="case-studies/restaurant-chain-water-treatment-standard.html" aria-label="Read the case study: A water standard for 20+ outlets">
         <div class="pcardf-img">
-          <span class="pcardf-tag">Fine-dining restaurant</span>
-          <img src="assets/img/projects/fine-dining-restaurant.jpg" width="1200" height="1600" alt="Pentair multi-stage filtration with UV disinfection and a pressurised feed, plumbed in Astral CPVC, at a fine-dining restaurant kitchen" />
+          <span class="pcardf-tag">Restaurant chain</span>
+          <span class="pcardf-cs">Case study</span>
+          <img src="assets/img/projects/fine-dining-restaurant.jpg" width="1200" height="1600" alt="Commercial water treatment train with multi-stage filtration and a pressurised feed at a restaurant kitchen, installed by DhwaNeer" />
         </div>
         <div class="pcardf-body">
-          <h3>Multi-stage filtration with UV</h3>
-          <p>Kitchen water treatment for a fine-dining restaurant &mdash; Pentair multi-stage filtration with UV disinfection and a pressurised feed, plumbed in Astral CPVC.</p>
+          <h3>A water standard for 20+ outlets</h3>
+          <p>Rented ROs kept failing. We proved a system at the worst outlet, hit zero breakdowns in year one, and it became the chain&rsquo;s benchmark.</p>
+          <span class="pcardf-more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
-      </article>
-      <article class="pcardf reveal d1">
+      </a>
+      <a class="pcardf pcardf-link reveal" href="case-studies/commercial-kitchen-ro-replacement.html" aria-label="Read the case study: When removing the RO was the fix">
         <div class="pcardf-img">
-          <span class="pcardf-tag">Institutional kitchen</span>
-          <img src="assets/img/projects/institutional-ro-plant.jpg" width="899" height="1599" loading="lazy" alt="Stainless-steel commercial RO plant with a pre-treatment vessel and panel-mounted flow and pressure monitoring for an institutional kitchen" />
+          <span class="pcardf-tag">Central kitchen</span>
+          <span class="pcardf-cs">Case study</span>
+          <img src="assets/img/projects/kitchen-uv900-a.jpg" width="1448" height="1086" loading="lazy" alt="Wall-mounted Pentair Everpure filtration bank with UV 900 disinfection replacing a floor-standing RO plant in a commercial kitchen" />
         </div>
         <div class="pcardf-body">
-          <h3>Commercial RO plant</h3>
-          <p>A stainless-steel commercial RO plant with a pre-treatment vessel for an institutional kitchen, with flow and pressure monitoring on the panel.</p>
+          <h3>When removing the RO was the fix</h3>
+          <p>A 500 LPH RO was treating 45 ppm water down to 4 ppm. We took it out, ended the reject water and recovered 72 sq ft of kitchen.</p>
+          <span class="pcardf-more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
-      </article>
-      <article class="pcardf reveal">
+      </a>
+      <a class="pcardf pcardf-link reveal" href="case-studies/in-house-drinking-water-plant.html" aria-label="Read the case study: From bought-in cans to 4,000 L a day">
         <div class="pcardf-img">
-          <span class="pcardf-tag">Speciality caf&eacute;</span>
-          <img src="assets/img/projects/cafe-pou-filtration.jpg" width="1200" height="1600" loading="lazy" alt="Point-of-use Pentair Everpure 4FC-S submicron filtration with UV for a speciality caf&eacute; beverage line, with DhwaNeer service tags" />
+          <span class="pcardf-tag">Institutional campus</span>
+          <span class="pcardf-cs">Case study</span>
+          <img src="assets/img/projects/institutional-ro-plant.jpg" width="899" height="1599" loading="lazy" alt="Commercial reverse-osmosis plant with pre-treatment vessel and panel-mounted flow and pressure monitoring at an institutional campus" />
         </div>
         <div class="pcardf-body">
-          <h3>Point-of-use filtration &amp; UV</h3>
-          <p>Point-of-use Pentair Everpure 4FC-S submicron filtration with UV for the caf&eacute;&rsquo;s beverage line &mdash; carrying our own service tags for scheduled cartridge changes.</p>
+          <h3>From bought-in cans to 4,000 L a day</h3>
+          <p>A campus buying 50 cans a day now produces its own, with washing, ozone sanitisation and filling on site.</p>
+          <span class="pcardf-more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
-      </article>
-      <article class="pcardf reveal d1">
-        <div class="pcardf-img">
-          <span class="pcardf-tag">Corporate facility</span>
-          <img src="assets/img/projects/corporate-treatment-train.jpg" width="1023" height="1045" loading="lazy" alt="Wall-mounted multi-stage Pentair bank with a spin-down sediment pre-filter feeding carbon and specialty stages at a corporate facility" />
-        </div>
-        <div class="pcardf-body">
-          <h3>Wall-mounted multi-stage bank</h3>
-          <p>A wall-mounted multi-stage Pentair bank &mdash; spin-down sediment pre-filter into carbon and specialty stages &mdash; laid out for quick, clean servicing.</p>
-        </div>
-      </article>
+      </a>
     </div>
   </div>
 </section>
@@ -1389,6 +1394,14 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
       <figure class="gfig reveal">
         <div class="gimg"><img src="assets/img/projects/pentair-manifold.jpg" width="1293" height="1217" loading="lazy" alt="A Pentair twin-cartridge manifold with pressure gauges and a stainless-steel UV chamber for compact under-counter treatment" /></div>
         <figcaption class="gcap">A twin-cartridge manifold with pressure gauges and UV &mdash; compact under-counter treatment.</figcaption>
+      </figure>
+      <figure class="gfig reveal">
+        <div class="gimg"><img src="assets/img/projects/cafe-pou-filtration.jpg" width="1200" height="1600" loading="lazy" alt="Point-of-use Pentair Everpure submicron filtration with UV for a speciality caf&eacute; beverage line, carrying DhwaNeer service tags" /></div>
+        <figcaption class="gcap">Point-of-use submicron filtration with UV on a caf&eacute; beverage line, tagged for scheduled cartridge changes.</figcaption>
+      </figure>
+      <figure class="gfig reveal">
+        <div class="gimg"><img src="assets/img/projects/corporate-treatment-train.jpg" width="1023" height="1045" loading="lazy" alt="Wall-mounted multi-stage Pentair bank with a spin-down sediment pre-filter feeding carbon and specialty stages at a corporate facility" /></div>
+        <figcaption class="gcap">A wall-mounted multi-stage bank at a corporate facility, laid out for quick, clean servicing.</figcaption>
       </figure>
     </div>
   </div>
@@ -1550,7 +1563,7 @@ if(mqtrack){mqtrack.innerHTML+=mqtrack.innerHTML;}
   if(!lb) return;
   function openLb(src,alt){ lbImg.src=src; lbImg.alt=alt||''; lb.classList.add('on'); lb.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
   function closeLb(){ lb.classList.remove('on'); lb.setAttribute('aria-hidden','true'); document.body.style.overflow=''; lbImg.src=''; }
-  document.querySelectorAll('.pcardf-img, .gimg, .hero-figure').forEach(function(box){
+  document.querySelectorAll('.pcardf:not(.pcardf-link) .pcardf-img, .gimg, .hero-figure').forEach(function(box){
     var img=box.querySelector('img'); if(!img) return;
     box.addEventListener('click', function(){ openLb(img.currentSrc||img.src, img.alt); });
   });
